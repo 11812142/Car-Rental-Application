@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @*<style>
+            body {
+                background-image: url(../images/car.jpg);
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-attachment: fixed;
+                background-size: 100% 100%;
+            }
+        </style>*@
+</head>
+<body>
+    <div class="navbar navbar-fixed-top " style="background-color: #e3f2fd;height:50px">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" title="more options">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Car Rental Application", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("HOME", "Index", "Home")</li>
+                    <li>@Html.ActionLink("ADMIN", "AdminLogin", "Car")</li>
+                    <li>@Html.ActionLink("CUSTOMER", "Login", "Customer")</li>
+
+                    
+                        @if (Session["u"] != null)
+                        {
+
+                            <li>@Html.ActionLink("Logout", "preventBack", "Car")</li>
+
+                            <script type="text/javascript">
+                            function preventBack() { window.history.forward(); }
+                            setTimeout("preventBack()", 0);
+                            window.onunload = function () { null };
+                            </script>
+
+                    }
+                    @if (Session["u1"] != null)
+                    {
+                        <li>
+                            @Html.ActionLink("LOGOUT", "preventBack", "Customer")
+                        </li>
+                        <li>
+                            @Html.ActionLink("PROFILE", "Details", "Customer")
+                        </li>
+                        <script type="text/javascript">
+                            function preventBack() { window.history.forward(); }
+                            setTimeout("preventBack()", 0);
+                            window.onunload = function () { null };
+                        </script>
+                    }
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
